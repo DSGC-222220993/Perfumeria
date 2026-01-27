@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hydrangea Essence | Perfumes</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap">
+</head>
+
+<body>
+    <header class="header">
+        <h1 class="header__title">Hydrangea Essence</h1>
+        <p>Bienvenido a nuestra tienda de perfumes</p>
+
+        <nav class="nav">
+            <button class="nav__button">Login</button>
+            <button class="nav__button">Catálogo</button>
+            <button class="nav__button">Favoritos</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="filters">
+            <button id="filtersAll__button">Todos</button>
+            <button id="filtersWomen__button">Mujer</button>
+            <button id="filtersMen__button">Hombre</button>
+            <button id="filtersPopular__button">Populares</button>
+        </section>
+
+        <section class="products" id="productsList"></section>
+        
+        <section class="favorites hidden" id="favoritesSection">
+            <!-- Los productos se cargarán aquí dinámicamente -->
+            <h2>Mis Favoritos</h2>
+            <div id="favoritesList"></div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Hydrangea Essence. Todos los derechos reservados.</p>
+    </footer>
+
+<script src="script.js"></script>
+</body>
+</html>
