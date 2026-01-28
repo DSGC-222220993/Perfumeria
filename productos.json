@@ -1,79 +1,81 @@
 [
 {
 "id": 1,
-"name": "Chanel No. 5",
-"brand": "Chanel",
+"name": "",
+"brand": "Boudoir",
 "price": 120,
 "popular": true,
-"image": "img/"
+"image": "img/boudoir.jpg"
 },
 {
 "id": 2,
-"name": "Dior Sauvage",
-"brand": "Dior",
+"name": "White Floral",
+"brand": "JILLSTUART",
 "price": 110,
 "popular": true,
-"image": "img/"
+"image": "img/white_floral.jpg"
 },
 {
 "id": 3,
-"name": "Light Blue",
-"brand": "Dolce & Gabbana",
+"name": "Lychee Bouquet",
+"brand": "Flower Knows",
 "price": 95,
 "popular": false,
-"image": "img/"
+"image": "img/lychee_bouquet.jpg"
 },
 {
 "id": 4, 
-"name": "Blue Essence",
-"brand": "Ocean", 
+"name": "Amore Me",
+"brand": "Jeanne Arthes", 
 "price": 850, 
 "popular": true, 
-"image": "img/perfume1.jpg" },
+"image": "img/amore_me.jpg" 
+},
 { 
 "id": 5,
-"name": "Green Forest",
-"brand": "Nature",
+"name": "Thank You, Next",
+"brand": "Ariana Grande",
 "price": 920, "popular": false,
-"image": "img/perfume2.jpg" 
+"image": "img/thank_you_next.jpg" 
 },
 {
 "id": 6,
-"name": "Crystal Light",
-"brand": "Elegance",
+"name": "Forever In Love",
+"brand": "Love Shack Fancy",
 "price": 1100,
 "popular": true,
-"image": "img/perfume3.jpg"
+"image": "img/forever_in_love.jpg"
 },
-{ "id": 7, 
-"name": "Ocean Breeze", 
-"brand": "Marine", 
+{ 
+"id": 7, 
+"name": "Midsummer Fairytales", 
+"brand": "Flower Knows", 
 "price": 980, 
 "popular": true, 
 "image": 
-"img/perfume4.jpg" 
+"img/midsummer_fairytales.jpg" 
 },
 { "id": 8,
-"name": "Soft Vanilla",
-"brand": "Sweet",
+"name": "Shell's Jewel",
+"brand": "Flower Knows",
 "price": 750,
 "popular": false,
-"image": "img/perfume5.jpg" 
+"image": "img/shell's_jewel.jpg" 
 },
 { 
 "id": 9, 
-"name": "Pure Citrus", 
-"brand":"Fresh", 
+"name": "Bluebell", 
+"brand":"Penhaligon`s", 
 "price":790,
 "popular":true,
-"image":"img/perfume9.jpg"
+"image":"img/bluebell.jpg"
 },
 { 
 "id":10,
-"name":"Lavender Calm",
-"brand":"Relax",
+"name":"Bombshell Isle",
+"brand":"Victoria`s Secret",
 "price":880,
 "popular":false,
-"image":"img/perfume10.jpg"
+"image":"img/bombshell_isle.jpg"
 }
 ]
