@@ -1,0 +1,160 @@
+* { margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; }
+body { 
+    font-family: 'Poppins', sans-serif; 
+    background: #f5f8ff; 
+    color: #222;
+ }
+
+.header { 
+    background: white; 
+    padding: 1rem; 
+    text-align: center; 
+}
+.header__logo { 
+    width: 180px; 
+    margin-bottom: 0.5rem; 
+}
+.header__title {
+  font-size: 3rem; 
+  font-weight: 700;
+  margin-top: 0.5rem;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+}
+.nav a { margin: 0 10px; text-decoration: none; color: #1e3a8a; font-weight: 500; }
+
+.section { padding: 2rem 1rem; text-align: center; }
+
+.gridProducts,
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+  align-items: stretch;
+}
+
+.card {
+  background: white;
+  padding: 1rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: #fafafa;
+}
+
+.card h4, .card p { text-align: center; margin-top: 0.5rem; }
+
+.card button,
+.card .fav-btn {
+  margin-top: auto;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0.12rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card button img,
+.card .fav-btn img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  display: block;
+  transition: transform .06s;
+}
+.card button img:hover,
+.card .fav-btn img:hover { transform: translateY(-2px); }
+
+.btn-primary,
+#loginBtn,
+#logoutBtn {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.55rem 0.9rem;
+  border-radius: 8px;
+  border: none;
+  background: #1e3a8a;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s, transform .06s;
+}
+.btn-primary:hover,
+#loginBtn:hover,
+#logoutBtn:hover { background: #16306f; transform: translateY(-1px); }
+.btn-primary:active,
+#loginBtn:active,
+#logoutBtn:active { transform: translateY(0); }
+
+#loginBox, .profile-login {
+  max-width: 360px;
+  margin: 0.75rem auto 1.5rem;
+  background: linear-gradient(180deg, #ffffff, #fbfcff);
+  padding: 1.25rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(30,58,138,0.06);
+  border: 1px solid rgba(30,58,138,0.06);
+  text-align: center;
+}
+
+#loginBox input[type="email"],
+#loginBox input[type="password"] {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  margin: 0.5rem 0;
+  border-radius: 8px;
+  border: 1px solid #e6e9f2;
+  background: #fff;
+  outline: none;
+  transition: border-color .15s, box-shadow .15s;
+  font-size: 0.95rem;
+}
+#loginBox input:focus { border-color: #3b82f6; box-shadow: 0 3px 8px rgba(59,130,246,0.12); }
+
+#userBox, .profile-user { max-width: 560px; margin: 0 auto 1.5rem; text-align: center; }
+#userBox p { margin-bottom: 0.4rem; font-weight: 600; }
+
+#popularList {
+  max-width: 980px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 160px));
+  justify-content: center;
+  justify-items: center;
+  gap: 1rem;
+}
+
+/* Centrar los cards en Favoritos */
+#favoriteList {
+  max-width: 980px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 160px));
+  justify-content: center;
+  justify-items: center;
+  gap: 1rem;
+}
+
+.hidden { display: none; }
+
+.footer { text-align: center; padding: 1rem; background: white; margin-top: 2rem; }
+
+@media (max-width: 480px) {
+  #loginBox { margin: 0.6rem 1rem 1rem; padding: 1rem; }
+  #loginBox input { font-size: 0.9rem; }
+  #loginBtn { width: 100%; padding: 0.6rem; }
+}

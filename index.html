@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hydrangea Essence | Perfumes</title>
-
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Hydrangea Essence || Perfumeria</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap">
 </head>
 
 <body>
     <header class="header">
-       <img src="logo.png" alt="Hydrangea Essence Logo" class="header__logo">
+       <img src="img/logo.png" alt="Hydrangea Essence Logo" class="header__logo">
        <h1 class="header__title">Hydrangea Essence</h1>
 
        <nav class="nav">
@@ -24,40 +23,44 @@
     </header>
 
     <main>
-        <section class="home" id="home section">
-            <h2>Bienvenido a nuestra tienda de perfumes</h2>
-            <p>Descubre nuestra exclusiva colección de perfumes.</p>
-
-        <section class="popular section" id="popularListSection">
-            <h2>Perfumes Populares</h2>
-            <div id="popularList" class="gridProducts"></div>
+        <section id="home" class="section home">
+            <h1>Bienvenido a nuestra tienda</h1>
+            <p>Descubre nuestra exclusiva colección de perfumes</p>
         </section>
 
-        <section class="products section" id="productsListSection">
+        <section id="popular" class="section">
             <h2>Perfumes Populares</h2>
-            <div id="productsList" class="gridProducts"></div>
+            <div id="popularList" class="grid"></div>
         </section>
-        
-        <section class="favorites section" id="favoritesListSection">
-            <h2>Perfil</h2>
 
+        <section id="products" class="section">
+            <h2>Todos los Perfumes</h2>
+            <div id="productList" class="grid"></div>
+        </section>
+
+        <section id="favorites" class="section">
+            <h2>Mi Perfil</h2>
             <div id="loginBox">
-                <input type="email" id="email" placeholder="Correpo Electrónico">
+                <input type="email" id="email" placeholder="Correo">
                 <input type="password" id="password" placeholder="Contraseña">
-                <button id="loginBtn">Iniciar Sesión</button>
+                <button id="loginBtn">Iniciar sesión</button>
             </div>
+
             <div id="userBox" class="hidden">
-                <p id="userEmail"></p>
-                <button id="logoutBtn">Cerrar Sesión</button>
+                <p id="welcomeUser"></p>
+                <button id="logoutBtn">Cerrar sesión</button>
             </div>
+
             <h3>Mis Favoritos</h3>
-                <div id="favoriteList" class="gridProducts"></div>
+            <div id="favoriteList" class="grid"></div>
         </section>
     </main>
+
     <footer class="footer">
         <p>&copy; 2026 Hydrangea Essence. Todos los derechos reservados.</p>
     </footer>
 
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>

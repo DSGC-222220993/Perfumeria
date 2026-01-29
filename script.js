@@ -1,181 +1,168 @@
-let perfumes =[];
-let favoritos =JSON.parse(localStorage.getItem("favorites")) || [];
-let userLogged= localStorage.getItem("userLogged") || null;
+let perfumes = [];
+let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+let userLogged = localStorage.getItem('user') || null;
 
-document.addEventListener("DOMContentLoaded", function() {
-    setupEventListeners();
-    updateSession();
+document.addEventListener('DOMContentLoaded', () => {
+  setupEventListeners();
+  loadPerfumes();
+  updateSession();
 });
 
 function setupEventListeners() {
-   const loginBtn= document.getElementById("loginBtn");
-   if (loginBtn) {
-       loginBtn.addEventListener("click", handleLogin);
-   }
-   const logoutBtn= document.getElementById("logoutBtn");
-   if (logoutBtn) {
-       logoutBtn.addEventListener("click", handleLogout);
-   }
-   document.querySelectorAll(".nav a").forEach(a => {
-        a.addEventListener("click", (e)=>{
-            const href= a.getAttribute("href");
-            if (href=="favorites") {
-                if (!userLogged) showLoginBox();
-                updateSession();
-            }
-        });
+  const loginBtn = document.getElementById('loginBtn');
+  const logoutBtn = document.getElementById('logoutBtn');
+
+  if (loginBtn) loginBtn.addEventListener('click', handleLogin);
+  if (logoutBtn) logoutBtn.addEventListener('click', handleLogout);
+
+  document.querySelectorAll('.nav a').forEach(a => {
+    a.addEventListener('click', () => {
+      if (a.getAttribute('href') === '#favorites' && !userLogged) {
+        showLoginBox();
+      }
     });
-    fetch('perfumes.json')
-    .then(res => {
-      if (!res.ok) throw new Error('HTTP error ' + res.status);
-      return res.json();
-    })
+  });
+}
+
+function loadPerfumes() {
+  fetch('perfumes.json')
+    .then(res => { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
     .then(data => {
       perfumes = data;
       showPopular();
       showProducts();
       showFavorites();
-      console.log('Perfumes cargados:', perfumes);
     })
     .catch(err => {
       console.error('Error cargando perfumes.json:', err);
       const productList = document.getElementById('productList');
-      if (productList) productList.innerHTML = '<p>Error al cargar productos. Sirve el proyecto con un servidor local.</p>';
+      if (productList) productList.innerHTML = '<p>Error al cargar productos. Usa un servidor local (Live Server).</p>';
     });
-    function showPopular() {
-        const popularList = document.getElementById('popularList');
-        if (!popularList) return;
-        popularList.innerHTML = '';
-        perfumes.filter(perfume => perfume.popular).forEach(perfume => {
-            popularList.innerHTML += `
-                <div class="product-card">
-                    <img src="${perfume.image}" alt="${perfume.name}" class="product-card__image">
-                    <h4>${perfume.name}</h4>
-                    <p>${perfume.brand}</p>
-                </div>`;
-        });
-    }
-    function showProducts() {
-        const productList = document.getElementById('productList');
-        if (!productList) return;
-        productList.innerHTML = '';
-        perfumes.forEach(perfume => {
-            const fav= favoritos.includes(perfume.id);
-            productList.innerHTML += `
-                <div class="product-card">
-                    <img src="${perfume.image}" alt="${perfume.name}" class="product-card__image">
-                    <h4>${perfume.name}</h4>
-                    <p>${perfume.brand}</p>
-                    <p>$$(perfume.price)</p>
+}
 
-                    ${userLogged ? `
-                    <button onclick="toggleFavorite(${perfume.id})" aria-label="Agregar a favoritos">
-                        <img src="img/${fav ? 'ic_favoritos' : 'ic_unfavoritos'}.png" width="24" alt="${fav ? 'Favorito' : 'No favorito'}">
-                    </button>` : ''}
-                </div>`;
-        });
+function showPopular() {
+  const list = document.getElementById('popularList');
+  if (!list) return;
+  list.innerHTML = '';
+  perfumes.filter(p => p.popular).forEach(p => {
+    list.innerHTML += `
+      <div class="card">
+        <div class="img-wrap"><img src="${p.image}" alt="${p.name}"></div>
+        <h4>${p.name}</h4>
+        <p>${p.brand}</p>
+      </div>`;
+  });
+}
 
-    }
+function showProducts() {
+  const list = document.getElementById('productList');
+  if (!list) return;
+  list.innerHTML = '';
+  perfumes.forEach(p => {
+    const fav = favorites.includes(p.id);
+    list.innerHTML += `
+      <div class="card">
+        <div class="img-wrap"><img src="${p.image}" alt="${p.name}"></div>
+        <h4>${p.name}</h4>
+        <p>${p.brand}</p>
+        <p>$${p.price}</p>
+        ${userLogged ? `<button class="fav-btn" onclick="toggleFavorite(${p.id})">
+          <img src="img/${fav ? 'ic_favoritos' : 'ic_unfavoritos'}.png" alt="${fav ? 'Favorito' : 'No favorito'}">
+        </button>` : ''}
+      </div>`;
+  });
+}
 
-    function toogleFavorite(perfumeId) {
-        if(!userLogged) {
-            alert("Debes iniciar sesión para agregar a favoritos.");
-            location.hash = "#favorites";
-            showLoginBox();
-            return;
-        }
-        if (favoritos.includes(perfumeId)) {
-            favoritos = favoritos.filter(id => id !== perfumeId);
-        } else {
-            favoritos.push(perfumeId);
-        }
-        localStorage.setItem("favorites", JSON.stringify(favoritos));
-        showProducts();
-        showFavorites();
-    }
+function toggleFavorite(id) {
+  if (!userLogged) {
+    alert('Inicia sesión para guardar favoritos.');
+    location.hash = '#favorites';
+    showLoginBox();
+    return;
+  }
+  if (favorites.includes(id)) favorites = favorites.filter(f => f !== id);
+  else favorites.push(id);
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+  showProducts();
+  showFavorites();
+}
 
-    function showFavorites() {
-        const favoriteList = document.getElementById('favoriteList');
-        if (!favoriteList) return;
-        favoriteList.innerHTML = '';
+function showFavorites() {
+  const list = document.getElementById('favoriteList');
+  if (!list) return;
+  list.innerHTML = '';
 
-        if (!userLogged) {
-            favoriteList.innerHTML = `
-            <p>Inicia sesión para ver tus favoritos.</p>
-            <button id="goLoginBtn">Iniciar sesión</button> `;
-            const btn = document.getElementById('goLoginBtn');
-            if (btn) btn.addEventListener('click', () => {
-                location.hash = '#favorites';
-                showLoginBox();
-            });
-            return;
-        }
-        const favPerfumes = perfumes.filter(perfume => favoritos.includes(perfume.id));
-        if (favPerfumes.length === 0) {
-            favoriteList.innerHTML = '<p>No tienes perfumes favoritos aún.</p>';
-            return;
-        }
+  if (!userLogged) {
+    list.innerHTML = `<p>Inicia sesión para ver favoritos.</p>`;
+    return;
+  }
 
-         
-        favs.forEach(p => {
-            const fav = favorites.includes(perfumes.id);
-            favoriteList.innerHTML += `
-            <div class="card">
-                <img src="${perfumes.image}" alt="${perfumes.name}">
-                <h4>${perfumes.name}</h4>
-                <p>${perfumes.brand}</p>
-                <p>$${perfumes.price}</p>
-                <button onclick="toggleFavorite(${perfumes.id})" aria-label="Quitar de favoritos">
-                    <img src="img/${fav ? 'ic_favoritos' : 'ic_unfavoritos'}.png" width="24" alt="favorito">
-                </button>
-            </div>`;
-        });
-    }
+  const favs = perfumes.filter(p => favorites.includes(p.id));
+  if (favs.length === 0) {
+    list.innerHTML = '<p>No tienes perfumes guardados.</p>';
+    return;
+  }
 
-    function handleLogin() {
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value.trim();
-        if (email || !password) {
-            alert("Por favor ingresa un correo y contraseña válidos.");
-            return
-        }
-        localStorage.setItem("userLogged", email);
-        userLogged = email;
-        updateSession();
-        showProducts();
-        showFavorites();
-        location.hash = "#favorites";
-    }
-    function handleLogout() {
-        localStorage.removeItem("userLogged");
-        userLogged = null;
-        updateSession();
-        showProducts();
-        showFavorites();
-    }
-    function updateSession() {
-        userLogged = localStorage.getItem("userLogged") || null;
-        const loginBox= document.getElementById("loginBox");
-        const userBox= document.getElementById("userBox");
-        const welcomeUser= document.getElementById("welcomeUser");
+  favs.forEach(p => {
+    const fav = favorites.includes(p.id);
+    list.innerHTML += `
+      <div class="card">
+        <div class="img-wrap"><img src="${p.image}" alt="${p.name}"></div>
+        <h4>${p.name}</h4>
+        <p>${p.brand}</p>
+        <p>$${p.price}</p>
+        <button class="fav-btn" onclick="toggleFavorite(${p.id})">
+          <img src="img/${fav ? 'ic_favoritos' : 'ic_unfavoritos'}.png" alt="favorito">
+        </button>
+      </div>`;
+  });
+}
 
-        if (userLogged) {
-            if (loginBox) loginBox.classList.add = ("hidden");
-            if (userBox) userBox.classList.remove("hidden");
-            if (welcomeUser) welcomeUser.textContent = `Hola, ${userLogged}`;
-        } else {
-            if (loginBox) loginBox.classList.remove("hidden");
-            if (userBox) userBox.classList.add("hidden");
-            if (welcomeUser) welcomeUser.textContent = '';
-        }
-    }
-    function showLoginBox() {
-        const loginBox= document.getElementById("loginBox");
-        const userBox= document.getElementById("userBox");
-        if (loginBox) loginBox.classList.remove("hidden");
-        if (userBox) userBox.classList.add("hidden");
-        const emailField= document.getElementById("email");
-        if (emailField) emailField.focus();
-    }   
+function handleLogin() {
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value.trim();
+  if (!email || !password) {
+    alert('Introduce correo y contraseña válidos.');
+    return;
+  }
+  localStorage.setItem('user', email);
+  userLogged = email;
+  updateSession();
+  showProducts();
+  showFavorites();
+  location.hash = '#favorites';
+}
 
+function handleLogout() {
+  localStorage.removeItem('user');
+  userLogged = null;
+  updateSession();
+  showProducts();
+  showFavorites();
+}
+
+function updateSession() {
+  userLogged = localStorage.getItem('user') || null;
+  const loginBox = document.getElementById('loginBox');
+  const userBox = document.getElementById('userBox');
+  const welcome = document.getElementById('welcomeUser');
+
+  if (userLogged) {
+    if (loginBox) loginBox.classList.add('hidden');
+    if (userBox) userBox.classList.remove('hidden');
+    if (welcome) welcome.textContent = `Hola, ${userLogged}`;
+  } else {
+    if (loginBox) loginBox.classList.remove('hidden');
+    if (userBox) userBox.classList.add('hidden');
+    if (welcome) welcome.textContent = '';
+  }
+}
+
+function showLoginBox() {
+  const loginBox = document.getElementById('loginBox');
+  const userBox = document.getElementById('userBox');
+  if (loginBox) loginBox.classList.remove('hidden');
+  if (userBox) userBox.classList.add('hidden');
+  const emailField = document.getElementById('email');
+  if (emailField) emailField.focus();
 }
