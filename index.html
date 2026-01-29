@@ -12,33 +12,48 @@
 
 <body>
     <header class="header">
-        <h1 class="header__title">Hydrangea Essence</h1>
-        <p>Bienvenido a nuestra tienda de perfumes</p>
+       <img src="logo.png" alt="Hydrangea Essence Logo" class="header__logo">
+       <h1 class="header__title">Hydrangea Essence</h1>
 
-        <nav class="nav">
-            <button class="nav__button">Login</button>
-            <button class="nav__button">Catálogo</button>
-            <button class="nav__button">Favoritos</button>
-        </nav>
+       <nav class="nav">
+        <a href="#home">Inicio</a>
+        <a href="#popular">Populares</a>
+        <a href="#products">Perfumes</a>
+        <a href="#favorites">Mis Favoritos</a>
+       </nav>
     </header>
 
     <main>
-        <section class="filters">
-            <button id="filtersAll__button">Todos</button>
-            <button id="filtersWomen__button">Mujer</button>
-            <button id="filtersMen__button">Hombre</button>
-            <button id="filtersPopular__button">Populares</button>
+        <section class="home" id="home section">
+            <h2>Bienvenido a nuestra tienda de perfumes</h2>
+            <p>Descubre nuestra exclusiva colección de perfumes.</p>
+
+        <section class="popular section" id="popularListSection">
+            <h2>Perfumes Populares</h2>
+            <div id="popularList" class="gridProducts"></div>
         </section>
 
-        <section class="products" id="productsList"></section>
+        <section class="products section" id="productsListSection">
+            <h2>Perfumes Populares</h2>
+            <div id="productsList" class="gridProducts"></div>
+        </section>
         
-        <section class="favorites hidden" id="favoritesSection">
-            <!-- Los productos se cargarán aquí dinámicamente -->
-            <h2>Mis Favoritos</h2>
-            <div id="favoritesList"></div>
+        <section class="favorites section" id="favoritesListSection">
+            <h2>Perfil</h2>
+
+            <div id="loginBox">
+                <input type="email" id="email" placeholder="Correpo Electrónico">
+                <input type="password" id="password" placeholder="Contraseña">
+                <button id="loginBtn">Iniciar Sesión</button>
+            </div>
+            <div id="userBox" class="hidden">
+                <p id="userEmail"></p>
+                <button id="logoutBtn">Cerrar Sesión</button>
+            </div>
+            <h3>Mis Favoritos</h3>
+                <div id="favoriteList" class="gridProducts"></div>
         </section>
     </main>
-
     <footer class="footer">
         <p>&copy; 2026 Hydrangea Essence. Todos los derechos reservados.</p>
     </footer>
