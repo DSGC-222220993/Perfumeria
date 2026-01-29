@@ -4,7 +4,7 @@
 "name": "",
 "brand": "Boudoir",
 "price": 120,
-"popular": true,
+"popular": false,
 "image": "img/boudoir.jpg"
 },
 {
@@ -12,7 +12,7 @@
 "name": "White Floral",
 "brand": "JILLSTUART",
 "price": 110,
-"popular": true,
+"popular": false,
 "image": "img/white_floral.jpg"
 },
 {
@@ -59,7 +59,7 @@
 "name": "Shell's Jewel",
 "brand": "Flower Knows",
 "price": 750,
-"popular": false,
+"popular": true,
 "image": "img/shell's_jewel.jpg" 
 },
 { 
